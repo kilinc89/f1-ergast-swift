@@ -4,11 +4,15 @@ import UIKit
 
 class StandingViewController: UIViewController {
     
-    @IBOutlet weak var conditionImageView: UIImageView!
-    @IBOutlet weak var temperatureLabel: UILabel!
-    @IBOutlet weak var cityLabel: UILabel!
+   
     @IBOutlet weak var searchTextField: UITextField!
-    
+    @IBOutlet weak var pointsLabel: UILabel!
+    @IBOutlet weak var pointsTextLabel: UILabel!
+    @IBOutlet weak var winsLabel: UILabel!
+    @IBOutlet weak var winsTextLabel: UILabel!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var lastNameLabel: UILabel!
+    @IBOutlet weak var brandLabel: UILabel!
     var SsandingManager = StandingManager()
     
     override func viewDidLoad() {
@@ -42,7 +46,6 @@ extension StandingViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        
         if let city = searchTextField.text {
             SsandingManager.fetchChampions(cityName: city)
         }
@@ -56,12 +59,16 @@ extension StandingViewController: UITextFieldDelegate {
 
 
 extension StandingViewController: StandingManagerDelegate {
-    
-
     func didUpdateChampions(_ SsandingManager:StandingManager, standing: StandingModel) {
         DispatchQueue.main.async {
-            self.temperatureLabel.text = standing.lastName
-            self.cityLabel.text = standing.name
+            self.pointsLabel.text = standing.points
+            self.pointsTextLabel.text="points"
+            self.winsLabel.text = standing.wins
+            self.winsTextLabel.text="wins"
+            self.nameLabel.text = standing.name
+            self.lastNameLabel.text = standing.lastName
+            
+            self.brandLabel.text=standing.constractor
         }
     }
     
